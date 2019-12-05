@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Hamburger',
+    date: 'Dec 4th, 2019',
+    image: 'https://pics.me.me/hamburger-hamhamham-burburbur-gergerger-hambur-burgerham-gerburger-hamger-geru-ur-54612751.png',
+    firstParagraph: `Hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham
+          hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham
+          hamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamhamham`,
+
+    secondParagraph: `BurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBur
+    BurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBur
+    BurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBurBur`,
+
+    thirdParagraph: `Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+          uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+          uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu`
   }
 ];
 
@@ -112,3 +128,63 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function generatePost(data) {
+
+  const container = document.createElement('div');
+
+  container.className = 'article';
+
+  const header = document.createElement('h2');
+
+  header.innerHTML = data.title;
+
+  const date = document.createElement('p');
+
+  date.className = 'date';
+
+  date.innerHTML = data.date;
+
+  const textOne = document.createElement('p');
+  const textTwo = document.createElement('p');
+  const textThree = document.createElement('p');
+  const image = document.createElement('img');
+
+  textOne.innerHTML = data.firstParagraph;
+  textTwo.innerHTML = data.secondParagraph;
+  textThree.innerHTML = data.thirdParagraph;
+
+  if (data.image != undefined)
+    image.src = data.image;
+
+  const button = document.createElement('span');
+
+  button.className = 'expandButton';
+  button.innerHTML = 'Expand Article';
+
+  button.addEventListener('click', () => {
+
+    if (container.classList.toggle('article-open'))
+      button.innerHTML = 'Close Article';
+    else
+      button.innerHTML = 'Expand Article';
+
+  });
+
+  container.appendChild(header);
+  container.appendChild(date);
+  container.appendChild(textOne);
+  container.appendChild(textTwo);
+  container.appendChild(textThree);
+  container.appendChild(image);
+  container.appendChild(button);
+
+  return container;
+
+}
+
+data.map(data => {
+
+  document.querySelector('.articles').appendChild(generatePost(data));
+
+});
